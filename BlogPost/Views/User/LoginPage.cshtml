@@ -1,0 +1,27 @@
+﻿@model BlogPost.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+    }
+
+<h2 class="text-center">Login</h2>
+
+<div class="container mt-4">
+    <form asp-action="LoginUp" asp-controller="User" method="post" onsubmit="return validateLogin();">
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input asp-for="UserName" class="form-control" required />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input asp-for="Password" type="password" class="form-control" required />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Login</button>
+        <a asp-action="Signin" asp-controller="User" class="btn btn-secondary">Sign Up</a>
+    </form>
+</div>
+

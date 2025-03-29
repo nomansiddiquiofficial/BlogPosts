@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Error";
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+<div class="container mt-5 text-center">
+    <div class="alert alert-danger">
+        <h4 class="alert-heading">Error!</h4>
+        <p>@errorMessage</p>
+    </div>
+    <a href="@Url.Action("Login", "User")" class="btn btn-primary">Go Back to Login</a>
+</div>
