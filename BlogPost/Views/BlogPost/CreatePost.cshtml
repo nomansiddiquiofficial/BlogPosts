@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create Blog Post";
+    
 }
 
 <h2 class="text-center">Create a New Blog Post</h2>
@@ -24,6 +25,11 @@
             <label asp-for="PusblishedAt" class="form-label">Published Date</label>
             <input asp-for="PusblishedAt" type="date" class="form-control" required />
             <span asp-validation-for="PusblishedAt" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="AuthorName" class="form-label">Author Name</label>
+            <input asp-for="AuthorName" type="text" class="form-control" required />
+            <span asp-validation-for="AuthorName" class="text-danger"></span>
         </div>
        
 

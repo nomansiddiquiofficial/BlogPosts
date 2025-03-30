@@ -9,6 +9,7 @@ var provider = builder.Services.BuildServiceProvider();
 var config = provider.GetRequiredService<IConfiguration>();
 builder.Services.AddDbContext<BlogPostContext>(item => item.UseSqlServer(config.GetConnectionString("dbcs")));
 
+builder.Services.AddHttpContextAccessor();
 // Add session support
 builder.Services.AddSession(options =>
 {
