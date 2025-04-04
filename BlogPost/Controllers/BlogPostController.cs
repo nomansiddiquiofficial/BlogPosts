@@ -101,5 +101,24 @@ namespace BlogPost.Controllers
                 _context.SaveChanges();
                 return RedirectToAction(nameof(AllPosts));
             }
+        [HttpPost]
+        public IActionResult AddComment(int id, Blog blog) {
+            if (id != null && blog !=null) {
+
+                _context.Comments.Add(new Comment {
+                    Content = blog.Content,
+                    CreatedAt = DateTime.Now,
+                    BlogId = (int)id,
+                    UserId = (int)_httpContextAccessor.HttpContext.Session.GetInt32("UserId")
+
+
+                } );
+                _context.Update(blog);
+                _context.SaveChangesAsync();
+
+            }
+            return RedirectToAction(nameof(AllPosts));
+
         }
+    }
     }

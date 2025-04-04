@@ -17,7 +17,7 @@ public partial class Blog
 
     public string? AuthorName { get; set; }
 
-    public string? Comments { get; set; }
+    public List<Comment>? Comments { get; set; }
 
     //Foreign key
     public int UserId { get; set; }
