@@ -1,6 +1,7 @@
 ﻿using BlogPost.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace BlogPost.Controllers
 {
@@ -102,18 +103,20 @@ namespace BlogPost.Controllers
                 return RedirectToAction(nameof(AllPosts));
             }
         [HttpPost]
-        public IActionResult AddComment(int id, Blog blog) {
-            if (id != null && blog !=null) {
+        [AutoValidateAntiforgeryToken]
+        public IActionResult AddComment(int id, string content) {
+            if (id != null) {
 
-                _context.Comments.Add(new Comment {
-                    Content = blog.Content,
+                var comment = new Comment
+                {
+                    Content = content,
                     CreatedAt = DateTime.Now,
-                    BlogId = (int)id,
-                    UserId = (int)_httpContextAccessor.HttpContext.Session.GetInt32("UserId")
+                    BlogId = (int)_httpContextAccessor.HttpContext.Session.GetInt32("UserId"),
+                    UserId = id
+                };
 
 
-                } );
-                _context.Update(blog);
+                _context.Comments.Add(comment);
                 _context.SaveChangesAsync();
 
             }
