@@ -12,4 +12,7 @@ public partial class User
     public string Password { get; set; } = null!;
 
     public DateTime CreatedAt { get; set; }
+
+    //one to many
+    public List<Blog> Blogs { get; set; }
 }

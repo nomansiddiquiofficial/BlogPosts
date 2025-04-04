@@ -12,7 +12,7 @@ namespace BlogPost.Controllers
 
         {
             this._context = context;
-           this._httpContextAccessor = httpContextAccessor;
+            this._httpContextAccessor = httpContextAccessor;
         }
         public IActionResult AllPosts()
         {
@@ -36,12 +36,28 @@ namespace BlogPost.Controllers
             [HttpPost]
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> SubmitPost(Blog blog)
-            {
-                _context.Blogs.Add(blog);
+            {   
+                blog.UserId = (int)_httpContextAccessor.HttpContext.Session.GetInt32("UserId");
+            _context.Blogs.Add(blog);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(AllPosts));
             }
+            
+        [HttpGet]
+        public IActionResult MyPosts()
+        {
+            if(_httpContextAccessor.HttpContext?.Session.GetInt32("UserId") != null)
+            {
+                var userId = _httpContextAccessor.HttpContext.Session.GetInt32("UserId");
+                var myPosts = _context.Blogs.Where(b => b.UserId == userId).ToList();
+                return View(myPosts);
+            }
+            else
+            {
+                return View("~/Views/User/LoginPage.cshtml");
+            }
 
+        }
 
             public async Task<IActionResult> EditPost(int id)
             {
