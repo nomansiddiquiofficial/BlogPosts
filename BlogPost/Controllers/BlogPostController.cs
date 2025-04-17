@@ -107,12 +107,13 @@ namespace BlogPost.Controllers
         public IActionResult AddComment(int id, string content) {
             if (id != null) {
 
+                
                 var comment = new Comment
                 {
                     Content = content,
                     CreatedAt = DateTime.Now,
-                    BlogId = (int)_httpContextAccessor.HttpContext.Session.GetInt32("UserId"),
-                    UserId = id
+                    BlogId = id,
+                  
                 };
 
 

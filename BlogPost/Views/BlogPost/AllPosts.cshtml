@@ -39,8 +39,9 @@
                 <p class="card-text"><small class="text-muted">Published: @post.PusblishedAt.Date</small></p>
 
                 <div class="mt-3">
-                    <form asp-action="AddComment" asp-controller="BlogPost" method="post">
-                        <input type="hidden" name="BlogId" value="@post.Id" />
+                    <form asp-route-id="@post.Id" asp-action="AddComment" asp-controller="BlogPost" method="post">
+                        <input  type="hidden" name="BlogId" value="@post.Id" />
+                        <input type="hidden" name="UserId" value="@post.UserId" />
                         <div class="form-group">
                             <textarea name="Content" class="form-control" rows="3" placeholder="Add a comment..." required></textarea>
                         </div>
@@ -86,7 +87,7 @@
                             @foreach (var comment in post.Comments)
                             {
                                 <li class="list-group-item">
-                                    <strong> @comment.User.UserName:</strong>@comment.Content
+                                   @* <strong> @comment.User.UserName:</strong>@comment.Content *@
                                     <br />
                                     <small class="text-muted">Posted on @comment.CreatedAt</small>
                                 </li>

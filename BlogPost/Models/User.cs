@@ -15,4 +15,6 @@ public partial class User
 
     //one to many
     public List<Blog> Blogs { get; set; }
+
+
 }
